@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RTSP Stream Analysis</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container my-5">
+    <h1 class="text-center mb-4">RTSP Stream Analysis</h1>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <form id="rtsp-form">
+          <div class="mb-3">
+            <label for="rtsp-link" class="form-label">Enter RTSP URL</label>
+            <input type="text" class="form-control" id="rtsp-link" placeholder="rtsp://example.com/stream">
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary" id="analyze-btn" disabled>Analyze</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script>
+    "use strict";
+    const rtspLink = document.getElementById('rtsp-link');
+    const analyzeBtn = document.getElementById('analyze-btn');
+    const previewVideo = document.getElementById('preview-video');
+
+    rtspLink.addEventListener('input', function () {
+      const rtspUrl = rtspLink.value;
+      if (rtspUrl) {
+        previewVideo.src = rtspUrl;
+        previewVideo.style.display = 'block';
+        analyzeBtn.disabled = false;
+      } else {
+        previewVideo.style.display = 'none';
+        analyzeBtn.disabled = true;
+      }
+    });
+
+    const form = document.getElementById('rtsp-form');
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const rtspUrl = rtspLink.value;
+      const local_server_url = `${window.location.protocol}//${window.location.hostname}:${window.location.port}`;
+      const redirectUrl = `${local_server_url}/predict?source=${encodeURIComponent(rtspUrl)}`;
+      window.location.href = redirectUrl;
+    });
+  </script>
+</body>
+
+</html>
