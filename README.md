@@ -1,4 +1,4 @@
-# 🔥 YOLOv8 API WebKit 🤖
+# YOLOv8 API WebKit 🤖
 
 YOLOv8 project! Whether you're a coding ninja 💻 or just getting started, this repo is your ticket to the world of object detection, segmentation, classification, and pose estimation. Let's dive in! 🌊
 
